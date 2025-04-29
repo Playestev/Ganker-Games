@@ -13,26 +13,31 @@
       color: #00ff00;
     }
 
+    /* Encabezado fijo con logo y título */
     .header {
+      position: sticky;
+      top: 0;
       background-color: #000;
       padding: 20px 40px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 20px;
+      z-index: 100;
     }
 
     .header img {
-      height: 60px;
+      height: 80px;
     }
 
     .header h1 {
       margin: 0;
-      font-size: 36px;
-      color: #00ff00;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 255, 0, 0.7);
     }
 
-    /* Carrusel */
+    /* Carrusel de imágenes */
     .carousel-container {
       width: 100%;
       overflow: hidden;
@@ -44,7 +49,7 @@
     .carousel-track {
       display: flex;
       width: 300%;
-      animation: scroll 12s infinite linear;
+      transition: transform 0.5s ease;
     }
 
     .carousel-track img {
@@ -53,13 +58,29 @@
       object-fit: cover;
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 10;
     }
 
+    .carousel-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .carousel-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Productos destacados */
     .featured-item {
       display: flex;
       justify-content: center;
@@ -121,7 +142,7 @@
 </head>
 <body>
 
-  <!-- Encabezado con logo -->
+  <!-- Encabezado con logo y título -->
   <div class="header">
     <img src="https://i.postimg.cc/0Nx5xFZh/LOGO-TIENDA2.png" alt="Logo Ganker" />
     <h1>Ganker Games Fortnite-Shop</h1>
@@ -133,6 +154,10 @@
       <img src="https://i.postimg.cc/HLYXLH8x/1.jpg" alt="Banner 1">
       <img src="https://via.placeholder.com/1080x400.png?text=Banner+2" alt="Banner 2">
       <img src="https://via.placeholder.com/1080x400.png?text=Banner+3" alt="Banner 3">
+    </div>
+    <div class="carousel-buttons">
+      <button class="carousel-button" onclick="moveCarousel(-1)">&#10094;</button>
+      <button class="carousel-button" onclick="moveCarousel(1)">&#10095;</button>
     </div>
   </div>
 
@@ -160,5 +185,11 @@
     </div>
   </div>
 
-</body>
-</html>
+  <script>
+    let currentIndex = 0;
+
+    function moveCarousel(direction) {
+      const track = document.querySelector('.carousel-track');
+      const totalSlides = track.children.length;
+      currentIndex = (currentIndex +
+::contentReference[oaicite:2]{index=2}
