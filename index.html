@@ -8,48 +8,48 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #121212;
-      color: #00ff00; /* Letras verdes */
+      color: #00ff00;
       margin: 0;
       padding: 0;
     }
+
     .header {
       background-color: #1f1f1f;
       padding: 20px;
       text-align: center;
     }
+
     .header h1 {
       margin: 0;
       font-size: 36px;
       color: #00ff00;
     }
 
-    /* Estilo de imagen destacada */
     .featured-item {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
       padding: 40px 20px;
       background-color: #1a1a1a;
+      flex-wrap: wrap;
     }
+
     .featured-item img {
       width: 1080px;
       max-width: 100%;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     }
+
     .featured-item .item-info {
-      text-align: center;
-      margin-top: 20px;
+      margin-left: 40px;
+      text-align: left;
     }
 
     .item-info h2 {
       font-size: 26px;
-      margin-bottom: 10px;
       color: #00ff00;
-    }
-
-    .item-info p {
-      color: #80ff80;
+      margin-top: 20px;
     }
 
     .price {
@@ -91,6 +91,7 @@
       align-items: center;
       text-align: center;
       padding: 20px;
+      position: relative;
     }
 
     .shop-item img {
@@ -99,8 +100,22 @@
       border-radius: 8px;
     }
 
-    .shop-item .item-info p {
-      color: #80ff80;
+    .shop-item .item-info {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      text-align: right;
+    }
+
+    .shop-item .item-info h2 {
+      color: #00ff00;
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .shop-item .item-info .price {
+      color: #f8c500;
+      font-size: 18px;
     }
   </style>
 </head>
@@ -109,12 +124,11 @@
     <h1>Ganker Games Fortnite-Shop</h1>
   </div>
 
-  <!-- Imagen destacada al centro -->
+  <!-- Imagen destacada -->
   <div class="featured-item">
     <img src="https://i.postimg.cc/HLYXLH8x/1.jpg" alt="Lote Psicópata" />
     <div class="item-info">
       <h2>Lote Psicópata</h2>
-      <p>¡Consigue este increíble guerrero para tu próxima batalla!</p>
       <div class="price">$200 Pesos MX</div>
       <a class="whatsapp-button" href="https://wa.me/5211234567890?text=Hola,%20quiero%20comprar%20el%20Lote%20Psicópata%20de%20la%20tienda%20Fortnite" target="_blank">
         Comprar en WhatsApp
@@ -122,13 +136,12 @@
     </div>
   </div>
 
-  <!-- Artículos adicionales -->
+  <!-- Otros artículos -->
   <div class="shop-container">
     <div class="shop-item">
       <img src="https://via.placeholder.com/300x300.png?text=Emote+Bailar%C3%ADn" alt="Emote Bailarín" />
       <div class="item-info">
         <h2>Emote Bailarín</h2>
-        <p>Baila con estilo en el campo de batalla.</p>
         <div class="price">500 V-Bucks</div>
         <a class="whatsapp-button" href="https://wa.me/5211234567890?text=Hola,%20quiero%20comprar%20el%20Emote%20Bailar%C3%ADn%20de%20la%20tienda%20Fortnite" target="_blank">
           Comprar en WhatsApp
@@ -140,7 +153,6 @@
       <img src="https://via.placeholder.com/300x300.png?text=Pickaxe+R%C3%A1pido" alt="Pickaxe Rápido" />
       <div class="item-info">
         <h2>Pickaxe Rápido</h2>
-        <p>¡Destruye recursos con esta herramienta veloz!</p>
         <div class="price">800 V-Bucks</div>
         <a class="whatsapp-button" href="https://wa.me/5211234567890?text=Hola,%20quiero%20comprar%20la%20Pickaxe%20R%C3%A1pido%20de%20la%20tienda%20Fortnite" target="_blank">
           Comprar en WhatsApp
