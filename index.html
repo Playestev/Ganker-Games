@@ -2,46 +2,42 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tienda Fortnite Personalizada</title>
+  <title>Tienda de Fortnite</title>
   <style>
-    body { font-family: sans-serif; background: #111; color: #fff; }
-    .item { border: 1px solid #444; padding: 10px; margin: 10px; background: #222; }
-    img { width: 100px; }
-    .whatsapp { background: green; color: white; padding: 5px 10px; text-decoration: none; }
+    body { font-family: Arial, sans-serif; background-color: #111; color: white; margin: 0; padding: 20px; }
+    h1 { text-align: center; }
+    .tienda { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .item { background: #222; padding: 15px; border-radius: 10px; width: 180px; text-align: center; }
+    .item img { width: 100%; border-radius: 8px; }
+    .whatsapp { display: block; margin-top: 10px; background-color: green; color: white; padding: 8px; text-decoration: none; border-radius: 5px; }
   </style>
 </head>
 <body>
   <h1>Tienda de Fortnite</h1>
-  <div id="tienda"></div>
+  <div id="tienda" class="tienda"></div>
 
   <script>
-    const tienda = document.getElementById("tienda");
-    const preciosPersonalizados = {
-      "Peely": "5 USD",
-      "Renegade Raider": "10 USD"
-    };
-
-    fetch("https://fortnite-api.com/v2/shop/br/combined")
+    fetch('https://fortnite-api.com/v2/shop')
       .then(res => res.json())
       .then(data => {
-        const items = data.data.featured.entries.flatMap(entry => entry.items);
-        items.forEach(item => {
+        const tienda = document.getElementById("tienda");
+        data.data.forEach(entry => {
+          const item = entry.items[0];
+          if (!item) return;
           const nombre = item.name;
           const imagen = item.images.icon;
-          const precio = preciosPersonalizados[nombre] || "Consultar";
-
-          tienda.innerHTML += `
+          tienda.innerHTML += \`
             <div class="item">
-              <h3>${nombre}</h3>
-              <img src="${imagen}" alt="${nombre}">
-              <p>Precio: ${precio}</p>
-              <a class="whatsapp" href="https://wa.me/1234567890?text=Hola, quiero más info sobre ${nombre}" target="_blank">
+              <img src="\${imagen}" alt="\${nombre}">
+              <h3>\${nombre}</h3>
+              <a href="https://wa.me/1234567890?text=Hola, estoy interesado en \${nombre}" class="whatsapp" target="_blank">
                 Consultar por WhatsApp
               </a>
             </div>
-          `;
+          \`;
         });
-      });
+      })
+      .catch(err => console.error("Error cargando la tienda:", err));
   </script>
 </body>
 </html>
