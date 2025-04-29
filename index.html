@@ -113,14 +113,24 @@
     .item-info h2 {
       font-size: 36px;
       margin: 10px 0;
-      color: #00ff00;
+      color: #ffffff;
+      background-color: #111;
+      padding: 10px 20px;
+      border-left: 5px solid #00ff00;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
     }
 
     .price {
       font-size: 32px;
       font-weight: bold;
-      color: #f8c500;
+      color: #000;
+      background-color: #f8c500;
+      padding: 10px 20px;
+      border-left: 5px solid #fff200;
+      border-radius: 8px;
       margin: 10px 0;
+      box-shadow: 0 0 10px rgba(248, 197, 0, 0.5);
     }
 
     .whatsapp-button {
@@ -150,7 +160,7 @@
 
   <!-- Carrusel de imágenes -->
   <div class="carousel-container">
-    <div class="carousel-track">
+    <div class="carousel-track" id="carouselTrack">
       <img src="https://i.postimg.cc/HLYXLH8x/1.jpg" alt="Banner 1">
       <img src="https://via.placeholder.com/1080x400.png?text=Banner+2" alt="Banner 2">
       <img src="https://via.placeholder.com/1080x400.png?text=Banner+3" alt="Banner 3">
@@ -189,7 +199,12 @@
     let currentIndex = 0;
 
     function moveCarousel(direction) {
-      const track = document.querySelector('.carousel-track');
+      const track = document.getElementById('carouselTrack');
       const totalSlides = track.children.length;
-      currentIndex = (currentIndex +
-::contentReference[oaicite:2]{index=2}
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  </script>
+
+</body>
+</html>
