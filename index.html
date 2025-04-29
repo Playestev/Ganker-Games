@@ -57,11 +57,11 @@
   <!-- 🟩 Producto agregado manualmente -->
   <div class="tienda">
     <div class="item">
-      <img src="https://fortnite-api.com/images/cosmetics/br/newdisplayassets/1d89065655a180ca/renderimage_0.png" alt="Lote de Taquilla d4vd">
+      <img src="https://fortnite-api.com/images/cosmetics/br/newdisplayassets/1d89065655a180ca/renderimage_0.png" alt="d4vd's Locker Bundle">
       <h3>d4vd's Locker Bundle</h3>
       <div class="price">
         <img src="https://fortnite-api.com/images/vbuck.png" alt="V-Bucks">
-        <del>1,800 PAVOS</del> <strong>$180 MNX</strong>
+        <del>4800</del> <strong>3000</strong>
       </div>
       <a href="https://wa.me/1234567890?text=Hola, me interesa el bundle d4vd's Locker" class="whatsapp" target="_blank">
         Consultar por WhatsApp
@@ -71,27 +71,100 @@
 
   <!-- 🟦 Tienda dinámica desde la API -->
   <script>
-    fetch('https://fortnite-api.com/v2/shop')
-      .then(res => res.json())
-      .then(data => {
-        const tienda = document.getElementById("tienda");
-        data.data.forEach(entry => {
-          const item = entry.items[0];
-          if (!item) return;
-          const nombre = item.name;
-          const imagen = item.images.icon;
-          tienda.innerHTML += `
-            <div class="item">
-              <img src="${imagen}" alt="${nombre}">
-              <h3>${nombre}</h3>
-              <a href="https://wa.me/1234567890?text=Hola, estoy interesado en ${nombre}" class="whatsapp" target="_blank">
-                Consultar por WhatsApp
-              </a>
+    function actualizarTienda() {
+      const productos = [
+        {
+          id: "Pickaxe_MouseFight",
+          name: "Ratzattak",
+          description: "Part of the Ratzattak set.",
+          image: "https://fortnite-api.com/images/cosmetics/br/backpack_mouse/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Ratzattak",
+        },
+        {
+          id: "Pickaxe_DecaSphere",
+          name: "Deca-Flail",
+          description: "Ball in play.",
+          image: "https://fortnite-api.com/images/cosmetics/br/pickaxe_decasphere/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Deca-Flail",
+        },
+        {
+          id: "Backpack_DecaSphere",
+          name: "Rackpack",
+          description: "Always be ready to rack 'em up.",
+          image: "https://fortnite-api.com/images/cosmetics/br/backpack_decasphere/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Rackpack",
+        },
+        {
+          id: "Glider_BlackWidow",
+          name: "Hatchling",
+          description: "Along came a glider...",
+          image: "https://fortnite-api.com/images/cosmetics/br/glider_id_086_blackwidow/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Hatchling",
+        },
+        {
+          id: "Wrap_Bruce",
+          name: "Sharky",
+          description: "Show your style.",
+          image: "https://fortnite-api.com/images/cosmetics/br/wrap_242_bruce/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Sharky",
+        },
+        {
+          id: "EID_Harmony",
+          name: "Feel It",
+          description: "The sensation strikes.",
+          image: "https://fortnite-api.com/images/cosmetics/br/eid_harmony/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Feel It",
+        },
+        {
+          id: "Pickaxe_EmeraldGlassGreen",
+          name: "Blackwhip Axe",
+          description: "Keep your emotions in control.",
+          image: "https://fortnite-api.com/images/cosmetics/br/pickaxe_emeraldglassgreen/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Blackwhip Axe",
+        },
+        {
+          id: "Pickaxe_SlaughterDemon",
+          name: "Slaughter Demon",
+          description: "For the slayer in you.",
+          image: "https://fortnite-api.com/images/cosmetics/br/pickaxe_slaughterdemon/icon.png",
+          price: "800",
+          whatsappLink: "https://wa.me/1234567890?text=Hola, me interesa Slaughter Demon",
+        }
+      ];
+
+      const tienda = document.getElementById("tienda");
+      tienda.innerHTML = ''; // Limpiar la tienda antes de agregar nuevos productos
+
+      productos.forEach(producto => {
+        tienda.innerHTML += `
+          <div class="item">
+            <img src="${producto.image}" alt="${producto.name}">
+            <h3>${producto.name}</h3>
+            <p>${producto.description}</p>
+            <div class="price">
+              <img src="https://fortnite-api.com/images/vbuck.png" alt="V-Bucks">
+              <strong>${producto.price}</strong>
             </div>
-          `;
-        });
-      })
-      .catch(err => console.error("Error cargando la tienda:", err));
+            <a href="${producto.whatsappLink}" class="whatsapp" target="_blank">
+              Consultar por WhatsApp
+            </a>
+          </div>
+        `;
+      });
+    }
+
+    // Llamar a la función al cargar la página
+    actualizarTienda();
+
+    // Actualizar la tienda cada 1 hora (3600000 ms)
+    setInterval(actualizarTienda, 3600000); // Actualiza cada 60 minutos
   </script>
 </body>
 </html>
