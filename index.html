@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda de Fortnite</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; }
+    .item { display: inline-block; margin: 10px; width: 200px; background: #333; padding: 10px; border-radius: 8px; }
+    .item img { width: 100%; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Tienda de Fortnite (Actualizada)</h1>
+  <div id="shop"></div>
+
+  <script>
+    async function fetchFortniteShop() {
+      const response = await fetch("https://fortnite-api.com/v2/shop/br?language=es", {
+        headers: {
+          "Authorization": "e2bc026b-691f-4fbd-b44e-5d405d7787ee"
+        }
+      });
+
+      const data = await response.json();
+      const items = data.data.featured.entries;
+      const shopDiv = document.getElementById("shop");
+      shopDiv.innerHTML = '';
+
+      items.forEach(entry => {
+        entry.items.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "item";
+          itemDiv.innerHTML = `
+            <img src="${item.images.icon}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>Precio: ${entry.finalPrice} paVos</p>
+          `;
+          shopDiv.appendChild(itemDiv);
+        });
+      });
+    }
+
+    fetchFortniteShop();
+    setInterval(fetchFortniteShop, 1000 * 60 * 60); // Se actualiza cada 1 hora
+  </script>
+</body>
+</html>
