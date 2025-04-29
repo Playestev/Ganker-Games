@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Fortnite - Personalizada</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Tienda Fortnite Personalizada</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #fff; }
+    .item { border: 1px solid #444; padding: 10px; margin: 10px; background: #222; }
+    img { width: 100px; }
+    .whatsapp { background: green; color: white; padding: 5px 10px; text-decoration: none; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Tienda Fortnite - Personalizada</h1>
-    </header>
-    <main>
-        <section id="shop-items" class="shop-item">
-            <!-- Los productos se cargarán aquí usando JavaScript -->
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Tienda Fortnite - Todos los derechos reservados.</p>
-    </footer>
+  <h1>Tienda de Fortnite</h1>
+  <div id="tienda"></div>
 
-    <script src="script.js"></script>
+  <script>
+    const tienda = document.getElementById("tienda");
+    const preciosPersonalizados = {
+      "Peely": "5 USD",
+      "Renegade Raider": "10 USD"
+    };
+
+    fetch("https://fortnite-api.com/v2/shop/br/combined")
+      .then(res => res.json())
+      .then(data => {
+        const items = data.data.featured.entries.flatMap(entry => entry.items);
+        items.forEach(item => {
+          const nombre = item.name;
+          const imagen = item.images.icon;
+          const precio = preciosPersonalizados[nombre] || "Consultar";
+
+          tienda.innerHTML += `
+            <div class="item">
+              <h3>${nombre}</h3>
+              <img src="${imagen}" alt="${nombre}">
+              <p>Precio: ${precio}</p>
+              <a class="whatsapp" href="https://wa.me/1234567890?text=Hola, quiero más info sobre ${nombre}" target="_blank">
+                Consultar por WhatsApp
+              </a>
+            </div>
+          `;
+        });
+      });
+  </script>
 </body>
 </html>
