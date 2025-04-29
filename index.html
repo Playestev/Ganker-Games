@@ -43,8 +43,12 @@
         items.forEach(item => {
           const itemDiv = document.createElement("div");
           itemDiv.className = "item";
+
+          // Verificamos si item.images y item.images.icon existen
+          const imageUrl = item.images && item.images.icon ? item.images.icon : 'https://via.placeholder.com/150'; // Imagen por defecto si no existe
+
           itemDiv.innerHTML = `
-            <img src="${item.image.icon}" alt="${item.name}">
+            <img src="${imageUrl}" alt="${item.name}">
             <h3>${item.name}</h3>
             <p>Precio: ${item.price} paVos</p>
           `;
