@@ -1,108 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Tienda Fortnite Mejorada</title>
-  <style>
-    body { background: #1a1a1a; color: #fff; font-family: Arial; text-align: center; }
-    h1 { margin-top: 20px; }
-    .controls { margin: 20px; }
-    .controls button { margin: 5px; padding: 10px 15px; border: none; background: #333; color: white; border-radius: 5px; cursor: pointer; }
-    .controls button:hover { background: #555; }
-    #shop { display: flex; flex-wrap: wrap; justify-content: center; }
-    .item { background: #2a2a2a; margin: 10px; padding: 10px; width: 280px; border-radius: 10px; text-align: left; transition: 0.3s; }
-    .item img { width: 100%; border-radius: 8px; }
-    .item:hover { transform: scale(1.03); }
-    iframe { width: 100%; height: 180px; border: none; margin-top: 10px; }
-    hr { border: 0.5px solid #555; margin: 10px 0; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Fortnite - Personalizada</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<h1>Tienda de Fortnite</h1>
-
-<div class="controls">
-  <button onclick="filterItems('all')">Mostrar Todo</button>
-  <button onclick="filterItems('bundles')">Sólo Bundles</button>
-</div>
-
-<div id="shop">Cargando tienda...</div>
-
-<script>
-let allItems = [];
-
-async function fetchFortniteShop() {
-  const shopDiv = document.getElementById("shop");
-  shopDiv.innerHTML = '<p>Cargando tienda...</p>';
-
-  try {
-    const response = await fetch("https://fortnite-api.com/v2/shop", {
-      headers: {
-        "Authorization": "e2bc026b-691f-4fbd-b44e-5d405d7787ee"
-      }
-    });
-
-    if (!response.ok) {
-      shopDiv.innerHTML = "<p>Error al cargar la tienda: " + response.status + "</p>";
-      return;
-    }
-
-    const data = await response.json();
-    allItems = data.data.entries;
-    renderShop('all');
-  } catch (error) {
-    shopDiv.innerHTML = "<p>Error: " + error.message + "</p>";
-  }
-}
-
-function renderShop(filter) {
-  const shopDiv = document.getElementById("shop");
-  shopDiv.innerHTML = '';
-
-  const filteredItems = allItems.filter(entry => {
-    if (filter === 'bundles') return entry.bundle;
-    return true;
-  });
-
-  filteredItems.forEach(entry => {
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "item";
-
-    const title = entry.bundle ? entry.bundle.name : (entry.brItems?.[0]?.name || "Producto");
-    const description = entry.bundle ? entry.bundle.info : (entry.brItems?.[0]?.description || "");
-    const imageUrl = entry.bundle?.image || entry.brItems?.[0]?.images?.icon || 'https://via.placeholder.com/300';
-    const rarity = entry.brItems?.[0]?.rarity?.displayValue || 'Desconocido';
-    const type = entry.brItems?.[0]?.type?.displayValue || '';
-    const regularPrice = entry.regularPrice || '---';
-    const finalPrice = entry.finalPrice || '---';
-    const video = entry.brItems?.[0]?.showcaseVideo || null;
-
-    itemDiv.innerHTML = `
-      <img src="${imageUrl}" alt="${title}">
-      <h3>${title}</h3>
-      <p>${description}</p>
-      <hr>
-      <p><strong>Rareza:</strong> ${rarity}</p>
-      <p><strong>Tipo:</strong> ${type}</p>
-      <p><strong>Precio:</strong> ${finalPrice} paVos ${regularPrice !== finalPrice ? '(Antes: ' + regularPrice + ')' : ''}</p>
-      ${video ? `<iframe src="https://www.youtube.com/embed/${video}" allowfullscreen></iframe>` : ''}
-    `;
-
-    shopDiv.appendChild(itemDiv);
-  });
-
-  if (filteredItems.length === 0) {
-    shopDiv.innerHTML = "<p>No hay objetos para mostrar.</p>";
-  }
-}
-
-function filterItems(option) {
-  renderShop(option);
-}
-
-fetchFortniteShop();
-setInterval(fetchFortniteShop, 60 * 60 * 1000); // Actualizar cada hora
-</script>
-
+    <header>
+        <h1>Tienda Fortnite - Personalizada</h1>
+    </header>
+    <main>
+        <section class="shop-item">
+            <div class="item-card">
+                <img src="https://example.com/imagen-item1.jpg" alt="Item 1">
+                <h3>Skin Ejemplo 1</h3>
+                <p class="price">Precio: $1,200 V-Bucks</p>
+                <button class="buy-button">Comprar</button>
+            </div>
+            <div class="item-card">
+                <img src="https://example.com/imagen-item2.jpg" alt="Item 2">
+                <h3>Skin Ejemplo 2</h3>
+                <p class="price">Precio: $800 V-Bucks</p>
+                <button class="buy-button">Comprar</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Tienda Fortnite - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
