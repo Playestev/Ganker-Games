@@ -31,7 +31,7 @@
         }
 
         const data = await response.json();
-        const items = data.shop;
+        const items = data.data.entries;  // Ahora estamos accediendo a "entries"
 
         shopDiv.innerHTML = '';
 
@@ -44,13 +44,15 @@
           const itemDiv = document.createElement("div");
           itemDiv.className = "item";
 
-          // Verificamos si item.images y item.images.icon existen
-          const imageUrl = item.images && item.images.icon ? item.images.icon : 'https://via.placeholder.com/150'; // Imagen por defecto si no existe
+          // Comprobamos si el objeto `bundle` tiene una imagen
+          const imageUrl = item.bundle && item.bundle.image ? item.bundle.image : 'https://via.placeholder.com/150'; // Imagen por defecto si no existe
 
           itemDiv.innerHTML = `
-            <img src="${imageUrl}" alt="${item.name}">
-            <h3>${item.name}</h3>
-            <p>Precio: ${item.price} paVos</p>
+            <img src="${imageUrl}" alt="${item.bundle ? item.bundle.name : 'Producto'}">
+            <h3>${item.bundle ? item.bundle.name : 'Producto'}</h3>
+            <p>Precio regular: ${item.regularPrice} paVos</p>
+            <p>Precio con descuento: ${item.finalPrice} paVos</p>
+            <p>${item.bundle ? item.bundle.info : 'No disponible'}</p>
           `;
           shopDiv.appendChild(itemDiv);
         });
@@ -64,3 +66,4 @@
   </script>
 </body>
 </html>
+
